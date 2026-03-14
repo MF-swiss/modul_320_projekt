@@ -1,9 +1,11 @@
 === EIN-/AUSFAHRT PROTOKOLL ===
-Start: 14.03.2026 09:25:04
+Start: 14.03.2026 09:42:31
 ================================
 
-[14.03.2026 09:25:29] EINFAHRT erfasst
-[14.03.2026 09:25:52] AUSFAHRT erfasst
+[14.03.2026 09:42:58] EINFAHRT erfasst
+[14.03.2026 09:43:28] AUSFAHRT erfasst
+[14.03.2026 09:44:14] EINFAHRT erfasst
+[14.03.2026 09:44:48] EINFAHRT erfasst
 
 ================================
-Ende: 14.03.2026 09:25:54
+Ende: 14.03.2026 09:45:11
