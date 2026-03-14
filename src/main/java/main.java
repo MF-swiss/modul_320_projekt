@@ -1,11 +1,35 @@
+import java.io.IOException;
 import java.util.Scanner;
 
 class Main {
 
     private static final String KEYCODE = "1234";
+    private static final int AUTO_CLOSE_SECONDS = 10;
 
     private static boolean isQuitCommand(String input) {
         return input != null && input.equalsIgnoreCase("q");
+    }
+
+    /**
+     * Wartet auf Benutzereingabe, schliesst aber automatisch nach 'seconds' Sekunden.
+     * Gibt die Eingabe zurück, oder null bei Timeout.
+     */
+    private static String waitForInputOrCountdown(Scanner scanner, int seconds) throws InterruptedException {
+        for (int i = seconds; i > 0; i--) {
+            System.out.print("\rTor schliesst automatisch in " + i + "s  (3 = jetzt, q = Beenden): ");
+            System.out.flush();
+            for (int j = 0; j < 10; j++) {
+                try {
+                    if (System.in.available() > 0) {
+                        System.out.println();
+                        return scanner.nextLine().trim();
+                    }
+                } catch (IOException e) { /* ignorieren */ }
+                Thread.sleep(100);
+            }
+        }
+        System.out.println();
+        return null; // Timeout - automatisch schliessen
     }
 
     public static void main(String[] args) throws Exception {
@@ -83,13 +107,16 @@ class Main {
 
                 case GATE_OPEN: {
                     ui.showGarageStatus(state, "GRUEN");
-                    System.out.println("Eingabe: 3 = Tor schließen, q = Beenden");
-                    String input = scanner.nextLine().trim();
+                    String input = waitForInputOrCountdown(scanner, AUTO_CLOSE_SECONDS);
                     if (isQuitCommand(input)) {
                         logger.log("Benutzer beendet Programm aus GATE_OPEN-Zustand");
                         running = false;
-                    } else if (input.equals("3")) {
-                        logger.log("Tor schließt sich...");
+                    } else {
+                        if (input == null) {
+                            logger.log("Countdown abgelaufen - Tor schliesst automatisch");
+                        } else {
+                            logger.log("Tor schliesst sich...");
+                        }
                         state = GarageState.GATE_CLOSING;
                     }
                     break;
@@ -132,13 +159,16 @@ class Main {
 
                 case AUSFAHRT_GATE_OPEN: {
                     ui.showGarageStatus(state, "GRUEN");
-                    System.out.println("Eingabe: 3 = Tor schließen, q = Beenden");
-                    String input = scanner.nextLine().trim();
+                    String input = waitForInputOrCountdown(scanner, AUTO_CLOSE_SECONDS);
                     if (isQuitCommand(input)) {
                         logger.log("Benutzer beendet Programm aus AUSFAHRT_GATE_OPEN-Zustand");
                         running = false;
-                    } else if (input.equals("3")) {
-                        logger.log("Tor schließt sich nach Ausfahrt...");
+                    } else {
+                        if (input == null) {
+                            logger.log("Countdown abgelaufen - Tor schliesst automatisch nach Ausfahrt");
+                        } else {
+                            logger.log("Tor schliesst sich nach Ausfahrt...");
+                        }
                         state = GarageState.GATE_CLOSING;
                     }
                     break;

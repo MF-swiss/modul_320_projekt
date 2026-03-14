@@ -62,7 +62,7 @@ public class GarageLogger {
             writer.write("Ende: " + LocalDateTime.now().format(DATE_TIME_FORMAT) + "\n");
             writer.flush();
         } catch (IOException e) {
-            System.err.println("Fehler beim Abschließen von " + file + ": " + e.getMessage());
+            System.err.println("Fehler beim Abschliessen von " + file + ": " + e.getMessage());
         }
     }
 }

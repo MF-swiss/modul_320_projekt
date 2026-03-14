@@ -4,7 +4,7 @@ public enum GarageState {
     WAITING_FOR_CAR,         // Einfahrt frei
     CAR_DETECTED,            // Auto erkannt (Einfahrt)
     GATE_OPEN,               // Tor offen (Einfahrt)
-    GATE_CLOSING,            // Tor schließt
+    GATE_CLOSING,            // Tor schliesst
     GATE_CLOSED,             // Tor geschlossen
     AUSFAHRT_GATE_OPENING,   // Tor öffnet für Ausfahrt
     AUSFAHRT_GATE_OPEN       // Tor offen - Auto fährt aus
