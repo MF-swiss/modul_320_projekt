@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.io.IOException; //Prüft, ob eine Eingabe vorliegt, ohne zu blockieren
 import java.util.Scanner;
 
 class Main {
@@ -20,17 +20,17 @@ class Main {
             System.out.print("\rTor schliesst automatisch in " + i + "s  (3 = jetzt, q = Beenden): ");
             System.out.flush();
             for (int j = 0; j < 10; j++) {
-                try {
+                try {                          // Prüft ob eine Eingabe vorliegt, ohne zu blockieren
                     if (System.in.available() > 0) {
                         System.out.println();
                         return scanner.nextLine().trim();
                     }
-                } catch (IOException e) { /* ignorieren */ }
-                Thread.sleep(100);
+                } catch (IOException e) { /* ignorieren */ }        // Die Ausnahme wir abgefangen und läuft weiter. 
+                Thread.sleep(100);  // sind 0.1 Sekunden (Schnellere Reation auf Benutzereingaben)
             }
         }
         System.out.println();
-        return null; // Timeout - automatisch schliessen
+        return null;     // Timeout, schliesst automatisch
     }
 
     public static void main(String[] args) throws Exception {
