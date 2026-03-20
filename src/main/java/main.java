@@ -48,6 +48,8 @@ class Main {
         try {
             while (running) {
 
+                //* switch mit case Zustände als saubere Lösung.
+                // Alternativ mit if-else */
                 switch (state) {
 
                 case GarageState.INIT: {
@@ -56,7 +58,7 @@ class Main {
 
                     String input = scanner.nextLine().trim();
                     if (isQuitCommand(input)) {
-                        logger.log("Benutzer beendet Programm aus INIT-Zustand");
+                        logger.log("Benutzer beendet Programm aus INIT-Zustand"); // Das Programm mit einer entsprechenden Logmeldung beendet.
                         running = false;
                     } else if (input.equals(KEYCODE)) {
                         logger.log("Korrekter Code eingegeben - Zugang gewährt");
@@ -72,7 +74,7 @@ class Main {
                     ui.showMessage("Zugang erlaubt", "Enter zum Starten, q zum Beenden.");
                     String input = scanner.nextLine().trim();
                     if (isQuitCommand(input)) {
-                        logger.log("Benutzer beendet Programm aus UNLOCKED-Zustand");
+                        logger.log("Benutzer beendet Programm aus UNLOCKED-Zustand"); // Das Programm mit einer entsprechenden Logmeldung beendet.
                         running = false;
                     } else {
                         logger.log("Einfahrt freigegeben - warte auf Auto");
